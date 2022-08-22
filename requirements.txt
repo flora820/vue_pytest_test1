@@ -1,0 +1,7 @@
+pytest
+pytest-xdist
+pytest-html
+pathlib
+requests
+openpyxl
+functoolsplus
