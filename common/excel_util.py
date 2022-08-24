@@ -53,5 +53,5 @@ class ExcelUtil(object):
 
 
 if __name__ == '__main__':
-    excel_path='/home/lihuachen/workspace/code/study_code/jiekou_testprj/vue_testcase.xlsx'
+    excel_path='/home/lihuachen/workspace/code/study_code/jiekou_testprj/vue_pytest_test1/data/excel/vue_testcase.xlsx'
     ExcelUtil(excel_path).read_excel()
