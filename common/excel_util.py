@@ -1,6 +1,6 @@
 from pathlib import Path
 from openpyxl import load_workbook
-from exception_utils import exception_utils
+from common.exception_utils import exception_utils
 import time
 
 @exception_utils
@@ -9,7 +9,7 @@ class ExcelUtil(object):
     def __init__(self, excel_path='%s/data/case_excel/接口测试框架实践用例.xlsx' % Path(__file__).parent.parent):
         self.wb = load_workbook(excel_path)
         self.base_dir = Path(__file__).parent.parent
-        self.template='{"id":0, "url":"","case_name":"","method":"","header":"","body":"",\
+        self.template = '{"id":0, "url":"","case_name":"","method":"","header":"","body":"",\
                 "expect_result":"","actual_result":"","valiadate":"","smoke":""},'
 
     @exception_utils
@@ -37,18 +37,24 @@ class ExcelUtil(object):
                 case_template_list[i]['actual_result']        = case_list[i][7]
                 case_template_list[i]['valiadate']        = case_list[i][8]
                 case_template_list[i]['smoke']        = case_list[i][9]
-            value.append({"cases":case_template_list})
+         #   value.append({"cases":case_template_list})
+            
+            value.append({str(sheetname):case_template_list})
         print("value:\t"+str(value)+"\n")
         
-
+        #for v in value:
         for v in value:
-            for case in v['cases']:
-                if 'yes' in str(case['smoke']):
-                    print(case['id'], case)
-                    smoke_value.append(case)
+            for sheetcase,total_case in v.items():
+                smoke_case=[]
+                print(len(total_case))
+                for case in total_case:
+                    if 'yes' in str(case['smoke']):
+                        smoke_case.append(case)
+                smoke_value.append({sheetcase:smoke_case})
 
         smoke={"smoke":smoke_value}
-        print("smoke:\t"+str(smoke_value)+"\n")
+        print("smoke:\t"+str(smoke)+"\n")
+
         return value,smoke
 
 

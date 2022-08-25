@@ -1,0 +1,31 @@
+smoke:
+- login:
+  - id: 1
+    url: login
+    case_name: 用户登录-正常
+    method: post
+    header: 'Content-Type: application/json'
+    body: "{ \n    \"username\":\"admin\",\n    \"password\": \"123456\"\n}"
+    expect_result: '"msg":"登录成功",
+
+      "status":200
+
+      '
+    actual_result: null
+    valiadate: null
+    smoke: 'yes'
+- user:
+  - id: 1
+    url: users
+    case_name: 获取用户-正常
+    method: get
+    header: '{Authorization:"${token}"}'
+    body: "{\n       \"pagenum\":1,\n        \"pagesize\": 1\n}"
+    expect_result: '"msg":"登录成功",
+
+      "status":200
+
+      '
+    actual_result: null
+    valiadate: null
+    smoke: 'yes'
