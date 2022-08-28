@@ -1,6 +1,7 @@
 import traceback
 from functools import wraps
-
+from pathlib import Path
+base_dir = Path(__file__).parent.parent
 
 def exception_utils(func):
     """处理异常的装饰器"""

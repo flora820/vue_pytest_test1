@@ -6,8 +6,8 @@ from common.yaml_util import *
 
 
 @exception_utils
-def extract_util(case_file, extract_file='%s/data/driven_yaml/extract.yaml'%s base_dir, \
-        user_yamlfile='%s/data/driven_yaml/user_config.yaml')
+def extract_util(case_file, extract_file='%s/data/driven_yaml/extract.yaml' % base_dir, \
+        user_yamlfile='%s/data/driven_yaml/user_config.yaml' % base_dir):
     
     """
     数据关联的公共方法
@@ -23,7 +23,39 @@ def extract_util(case_file, extract_file='%s/data/driven_yaml/extract.yaml'%s ba
 
  # 运行用例
     text_file = '%s/data/extract_replace.txt' % base_dir
+    
+    value_cases = str(read_yaml(case_file))
+    print(value_cases)
+
+#匹配表达式${}
+    p = r'\$\{(.*?)\}'
+    match_list = list(set(re.findall(p, value_cases)))
+    print (match_list)
+
+    global value_extract_keys, value_extract, total_extract
+    total_extract = {}
+
+    value_extract = read_yaml(extract_file)
+    value_user = read_yaml(user_yamlfile)
+    print(value_extract)
+    print(value_user)
+
+    if  value_extract:
+        total_extract.update(value_extract)
+    
+    if value_user:
+        total_extract.update(value_user)
+    print (total_extract)
+
+    for m in match_list:
+        if m in list(total_extract.keys()):
+           print(m) 
 
 
+if __name__ == '__main__':
+    case_file = '%s/data/yaml/user.yaml' % base_dir
+    extract_file = '%s/data/driven_yaml/extract.yaml' % base_dir
+    rep = extract_util(case_file,extract_file)
+    print(rep)
 
     

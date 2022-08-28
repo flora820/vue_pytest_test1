@@ -1,6 +1,6 @@
 from pathlib import Path
 from openpyxl import load_workbook
-from common.exception_utils import exception_utils
+from common.exception_utils import *
 import time
 
 @exception_utils
@@ -59,5 +59,5 @@ class ExcelUtil(object):
 
 
 if __name__ == '__main__':
-    excel_path='/home/lihuachen/workspace/code/study_code/jiekou_testprj/vue_pytest_test1/data/excel/vue_testcase.xlsx'
+    excel_path='%s/data/excel/vue_testcase.xlsx' % base_dir
     ExcelUtil(excel_path).read_excel()

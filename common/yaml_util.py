@@ -1,9 +1,7 @@
 from functools import wraps
 from pathlib import Path
 import yaml
-from common.excel_util import ExcelUtil
-
-base_dir = Path(__file__).parent.parent
+from common.excel_util import *
 
 def exception(fun):
     @wraps(fun)

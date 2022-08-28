@@ -33,7 +33,7 @@ def read_txt_handel(text_file):
     #"""将保存运行结果的txt数据，处理成想要的格式"""
     value = read_txt(text_file=text_file)
 
-if __name__ = '__main__':
+if __name__ == '__main__':
 
         read_txt_handel(text_file)
 
