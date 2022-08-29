@@ -40,11 +40,17 @@ def excel_to_yaml(excel_file):
             print("%s模块中用例数：%s" % (sheetcase, len(total_case)))
             j += len(total_case)
             file = '%s/data/yaml/%s.yaml' % (base_dir, sheetcase)
-            write_yaml(data=total_case, yaml_file=file)
+            write_yaml(data=v, yaml_file=file)
 
     # 2.冒烟用例
-    smoke_file = '%s/data/yaml/%s.yaml' % (base_dir, 'smoke')
-    write_yaml(data=smoke, yaml_file=smoke_file)
+   # smoke_file = '%s/data/yaml/%s.yaml' % (base_dir, 'smoke')
+   # write_yaml(data=smoke, yaml_file=smoke_file)
+    for v in smoke:
+        for sheetcase,total_case in v.items():
+            print("%s模块中冒烟用例数：%s" % (sheetcase, len(total_case)))
+            j += len(total_case)
+            file = '%s/data/yaml/smoke_%s.yaml' % (base_dir, sheetcase)
+            write_yaml(data=v, yaml_file=file)
     return j
 
 if __name__ == '__main__':

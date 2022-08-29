@@ -11,9 +11,8 @@ import json
 
 @pytest.mark.run(order=1)
 @pytest.mark.all
-@pytest.mark.parametrize('args', extract_util('%s/data/yaml/login.yaml' % base_dir))
-
-def test_login(args):
+@pytest.mark.parametrize('args', extract_util('%s/data/yaml/users.yaml' % base_dir))
+def test_users(args):
     url = args['url']
     header = eval(args['header'])
     method = args['method']
@@ -25,6 +24,3 @@ def test_login(args):
     rep = request_util(method, url, headers=header, payloads=payload, params=params, expect=expect, run_result_txt=run_result_txt)
     print("测试返回:",rep)
 
-    if args['id'] == 1:
-        token = json.loads(rep)['data']['token']
-        save_variable(key='token', value=token)

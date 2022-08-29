@@ -20,10 +20,9 @@ def extract_util(case_file, extract_file='%s/data/driven_yaml/extract.yaml' % ba
 
     返回——>替换${变量}后的数据
     """
+    excel_to_yaml('%s/data/excel/vue_testcase.xlsx'% base_dir)
 
  # 运行用例
-    text_file = '%s/data/extract_replace.txt' % base_dir
-    
     value_cases = str(read_yaml(case_file))
     print(value_cases)
 
@@ -45,17 +44,30 @@ def extract_util(case_file, extract_file='%s/data/driven_yaml/extract.yaml' % ba
     
     if value_user:
         total_extract.update(value_user)
+
     print (total_extract)
 
     for m in match_list:
         if m in list(total_extract.keys()):
-           print(m) 
+           p1 = r'\${%s}' % m
+           value_cases = re.sub(p1, total_extract[m], value_cases)
+    
+    print (value_cases)
+    return list(eval(value_cases).values())[0]
+
+@exception_utils
+def save_variable(key, value):
+    extract_file='%s/data/driven_yaml/extract.yaml' % base_dir
+    set_dict = {}
+    set_dict[key] = value
+    write_yaml(set_dict, extract_file)
 
 
 if __name__ == '__main__':
+    
     case_file = '%s/data/yaml/user.yaml' % base_dir
-    extract_file = '%s/data/driven_yaml/extract.yaml' % base_dir
+    extract_file = '%s/data/driven_yaml/extract_bk.yaml' % base_dir
     rep = extract_util(case_file,extract_file)
     print(rep)
-
     
+    #set_variable('test_qw', 'happyeveryday') 

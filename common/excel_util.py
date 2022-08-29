@@ -52,10 +52,11 @@ class ExcelUtil(object):
                         smoke_case.append(case)
                 smoke_value.append({sheetcase:smoke_case})
 
-        smoke={"smoke":smoke_value}
-        print("smoke:\t"+str(smoke)+"\n")
+       # smoke={"smoke":smoke_value}
+       # print("smoke:\t"+str(smoke)+"\n")
+        print("smoke:\t"+str(smoke_value)+"\n")
 
-        return value,smoke
+        return value,smoke_value
 
 
 if __name__ == '__main__':

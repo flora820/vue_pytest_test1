@@ -1,28 +1,31 @@
+login:
 - id: 1
-  url: login
+  url: ${base_url}/login
   case_name: 用户登录-正常
   method: post
-  header: 'Content-Type: application/json'
-  body: "{ \n    \"username\":\"admin\",\n    \"password\": \"123456\"\n}"
-  expect_result: '"msg":"登录成功",
-
-    "status":200
-
-    '
+  header: '{"Content-Type":"application/json"}'
+  body: '{"username":"admin","password":"123456"}'
+  expect_result: '"msg":"登录成功","status":200'
   actual_result: null
   valiadate: null
   smoke: 'yes'
 - id: 2
-  url: login
+  url: ${base_url}/login
   case_name: 用户登录-错误密码
   method: post
-  header: 'Content-Type: application/json'
-  body: "{\n     \"username\":\"admin\",\n    \"password\":  \"1234567\"\n}"
-  expect_result: '"msg":"登录成功",
-
-    "status":200
-
-    '
+  header: '{"Content-Type":"application/json"}'
+  body: '{"username":"admin","password":"1234567"}'
+  expect_result: msg":"密码错误","status":400
+  actual_result: null
+  valiadate: null
+  smoke: 'no'
+- id: 3
+  url: ${base_url}/login
+  case_name: 用户登录-错误用户名
+  method: post
+  header: '{"Content-Type":"application/json"}'
+  body: '{"username":"admintest","password":"1234567"}'
+  expect_result: msg":"用户名不存在","status":400
   actual_result: null
   valiadate: null
   smoke: 'no'

@@ -8,10 +8,10 @@ from common.excel_util import *
 def login():
     print("用例运行前，先登录")
 
-
 @pytest.fixture(scope='session', autouse=True)
 def my_fixture():
-        print("同步用例")
+    
+    print("同步用例")
     j = excel_to_yaml('%s/data/excel/vue_testcase.xlsx'% base_dir)  # 总用例数
     print("\n用例运行前置操作：")
     print("1.清空run_result.txt文件")
