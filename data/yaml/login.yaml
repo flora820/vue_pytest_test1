@@ -29,3 +29,23 @@ login:
   actual_result: null
   valiadate: null
   smoke: 'no'
+- id: 4
+  url: ${base_url}/login
+  case_name: 用户登录-空用户名
+  method: post
+  header: '{"Content-Type":"application/json"}'
+  body: '{"username":"","password":"1234567"}'
+  expect_result: msg":"参数错误","status":400
+  actual_result: null
+  valiadate: null
+  smoke: 'no'
+- id: 5
+  url: ${base_url}/login
+  case_name: 用户登录-空密码
+  method: post
+  header: '{"Content-Type":"application/json"}'
+  body: '{"username":"admin","password":""}'
+  expect_result: msg":"参数错误","status":400
+  actual_result: null
+  valiadate: null
+  smoke: 'no'
