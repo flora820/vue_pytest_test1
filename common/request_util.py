@@ -31,6 +31,6 @@ def request_util(method, url, headers, payloads=None, params=None, expect=None, 
         res = requests.request('DELETE', url=url, headers=headers, params=params) 
 
 
-    assert_util(expect, res.text, run_result_txt)
+#    assert_util(expect, res.text, run_result_txt)
     return res.text
 

@@ -1,6 +1,6 @@
 import pytest
 from common.extract_util import *
-from common.request_util import request_util 
+from common.request_util import * 
 from common.text_util import *
 from common.yaml_util import *
 import json
@@ -24,6 +24,8 @@ def test_login(args):
 
     rep = request_util(method, url, headers=header, payloads=payload, params=params, expect=expect, run_result_txt=run_result_txt)
     print("测试返回:",rep)
+    
+    assert_util(expect, response,run_result_txt)
 
     if args['id'] == 1:
         token = json.loads(rep)['data']['token']

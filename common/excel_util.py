@@ -40,7 +40,7 @@ class ExcelUtil(object):
          #   value.append({"cases":case_template_list})
             
             value.append({str(sheetname):case_template_list})
-        print("value:\t"+str(value)+"\n")
+       # print("value:\t"+str(value)+"\n")
         
         #for v in value:
         for v in value:
@@ -54,7 +54,7 @@ class ExcelUtil(object):
 
        # smoke={"smoke":smoke_value}
        # print("smoke:\t"+str(smoke)+"\n")
-        print("smoke:\t"+str(smoke_value)+"\n")
+        #print("smoke:\t"+str(smoke_value)+"\n")
 
         return value,smoke_value
 
