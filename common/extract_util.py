@@ -2,6 +2,7 @@ import re
 from common.exception_utils import exception_utils
 from common.text_util import *
 from common.yaml_util import *
+import json
 
 
 
@@ -24,7 +25,7 @@ def extract_util(case_file, extract_file='%s/data/driven_yaml/extract.yaml' % ba
 
  # 运行用例
     value_cases = str(read_yaml(case_file))
-    print(value_cases)
+   # print(value_cases)
 
 #匹配表达式${}
     p = r'\$\{(.*?)\}'
@@ -36,8 +37,8 @@ def extract_util(case_file, extract_file='%s/data/driven_yaml/extract.yaml' % ba
 
     value_extract = read_yaml(extract_file)
     value_user = read_yaml(user_yamlfile)
-    print(value_extract)
-    print(value_user)
+    #print(value_extract)
+    #print(value_user)
 
     if  value_extract:
         total_extract.update(value_extract)
@@ -49,8 +50,8 @@ def extract_util(case_file, extract_file='%s/data/driven_yaml/extract.yaml' % ba
 
     for m in match_list:
         if m in list(total_extract.keys()):
-           p1 = r'\${%s}' % m
-           value_cases = re.sub(p1, total_extract[m], value_cases)
+            p1 = r'\${%s}' % m
+            value_cases = re.sub(p1, total_extract[m], value_cases)
     
     print (value_cases)
     return list(eval(value_cases).values())[0]
@@ -61,6 +62,26 @@ def save_variable(key, value):
     set_dict = {}
     set_dict[key] = value
     write_yaml(set_dict, extract_file)
+
+
+@exception_utils
+def extract_case(case, config_file=None):
+    
+    p = r'\$\{(.*?)\}'
+    match_list = list(set(re.findall(p, json.dumps(case))))
+    print (match_list)
+    
+    value_extract
+    value_user = read_yaml(config_file)
+
+    if value_user:
+        for m in match_list:
+            if m in list(value_user.keys()):
+                p1 = r'\${%s}' % m
+                case = re.sub(p1, value_user[m], case)
+
+
+    return case
 
 
 if __name__ == '__main__':

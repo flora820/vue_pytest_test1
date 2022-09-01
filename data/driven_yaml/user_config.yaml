@@ -1,2 +1,6 @@
 base_url: http://127.0.0.1:8888/api/private/v1
-test_user: flora_test
+
+test_users_url: "/users"
+test_user: "flora_test"
+test_passwd: "123456"
+

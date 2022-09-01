@@ -7,6 +7,7 @@ from common.excel_util import *
 @pytest.fixture(scope="function")
 def login():
     print("用例运行前，先登录")
+    url='http://127.0.0.1:8888/api/private/v1/login'
 
 @pytest.fixture(scope='session', autouse=True)
 def my_fixture():
