@@ -22,6 +22,6 @@ def my_fixture():
   #  print("3.清空extract_replace.txt文件")
    # truncate_txt("%s/data/extract_replace.txt" % base_dir)
     print("4.清空extract.ymal文件")
-    truncate_txt("%s/data/driven_yaml/extract.yaml" % base_dir)
+#    truncate_txt("%s/data/driven_yaml/extract.yaml" % base_dir)
     yield
     print("\n用例运行后置操作：")

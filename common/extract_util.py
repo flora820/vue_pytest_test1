@@ -65,22 +65,29 @@ def save_variable(key, value):
 
 
 @exception_utils
-def extract_case(case, config_file=None):
+def extract_case(case, config_dict=None, config_file=None):
     
     p = r'\$\{(.*?)\}'
     match_list = list(set(re.findall(p, json.dumps(case))))
     print (match_list)
     
-    value_extract
-    value_user = read_yaml(config_file)
-
+    total_extract = {}
+    value_user = None
+    if config_file : 
+        value_user = read_yaml(config_file)
+        
     if value_user:
-        for m in match_list:
-            if m in list(value_user.keys()):
-                p1 = r'\${%s}' % m
-                case = re.sub(p1, value_user[m], case)
+        total_extract.update(value_user)
+    if config_dict:
+        total_extract.update(config_dict)
 
-
+    
+    for m in match_list:
+        if m in list(total_extract.keys()):
+            p1 = r'\${%s}' % m
+            case = re.sub(p1, str(total_extract[m]), case)
+    
+    print ("case:",case)
     return case
 
 
