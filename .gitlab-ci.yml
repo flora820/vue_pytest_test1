@@ -1,29 +1,11 @@
-before_script:
-  - echo "Before script section"
-  - echo "For example you might run an update here or install a build dependency"
-  - echo "Or perhaps you might print out some debugging details"
-
-after_script:
-  - echo "After script section"
-  - echo "For example you might do some cleanup here"
-
-
-build:
-  stage: build
-  # instead of calling g++ directly you can also use some build toolkit like make
-  # install the necessary build tools when needed
-  # before_script:
-  #   - apt update && apt -y install make autoconf
-  script:
-  artifacts:
-    paths:
-      # depending on your build setup it's most likely a good idea to cache outputs to reduce the build time
-      # cache:
-      #   paths:
-      #     - "*.o"
-
-# run tests using the binary built before
+#流水线的stages的顺序可以自己定义
+#相同阶段的任务将会并发的执行，上一个阶段的任务完整的结束之后，下一个阶段的任务才会开始执行 
+stages:
+  - build
+  - test 
+  - deploy 
 test:
   stage: test
   script:
-    - pytest
+     - pytest
+ 
