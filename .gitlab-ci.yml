@@ -8,4 +8,5 @@ test:
   stage: test
   script:
      - pytest
- 
+  tags: 
+    - test_api
