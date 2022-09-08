@@ -4,6 +4,12 @@ stages:
   - build
   - test 
   - deploy 
+build:
+  stage: build
+  script:
+     - pip install -r requirements.txt
+  tags: 
+    - test_api
 test:
   stage: test
   script:
