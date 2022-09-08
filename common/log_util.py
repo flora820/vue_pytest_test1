@@ -8,6 +8,7 @@ from common.text_util import base_dir
 class LogUtil(object):
     def __init__(self):
         self.logger = logging.getLogger("")
+        self.logger.propagate = False
         # 创建文件目录
         logs_dir = "%s/output/logs" % base_dir
         if os.path.exists(logs_dir) and os.path.isdir(logs_dir):
@@ -20,7 +21,7 @@ class LogUtil(object):
         logfilepath = os.path.join(logs_dir, logfilename)
         rotatingFileHandler = logging.handlers.RotatingFileHandler(filename=logfilepath,
                                                                    maxBytes=1024 * 1024 * 50,
-                                                                   backupCount=5)
+                                                                  backupCount=5)
         # 设置输出格式
         formatter = logging.Formatter('[%(asctime)s] [%(levelname)s] %(message)s', '%Y-%m-%d %H:%M:%S')
         rotatingFileHandler.setFormatter(formatter)
@@ -32,7 +33,7 @@ class LogUtil(object):
         self.logger.addHandler(rotatingFileHandler)
         self.logger.addHandler(console)
         self.logger.setLevel(logging.INFO)
-
+        
     def info(self, message):
         self.logger.info(message)
 
@@ -46,3 +47,5 @@ class LogUtil(object):
 
     def error(self, message):
         self.logger.error(message)
+
+log = LogUtil()

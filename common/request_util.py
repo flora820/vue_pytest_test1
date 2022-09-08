@@ -1,7 +1,7 @@
 import json
 import requests
 from common.text_util import *
-
+from common.log_util import *
 
 def assert_util(expect,response,run_result_txt):
 
@@ -18,6 +18,7 @@ def assert_util(expect,response,run_result_txt):
 
 
 def request_util(method, url, headers, payloads=None, params=None, expect=None, run_result_txt=None):
+    
     if method == 'get':
         res = requests.request('GET',url, headers=headers, params=params)
 
@@ -30,6 +31,9 @@ def request_util(method, url, headers, payloads=None, params=None, expect=None, 
     elif method == 'delete':
         res = requests.request('DELETE', url=url, headers=headers, params=params) 
 
+    log.info("\n\n------------------------------------------------------------------------------------------------\n\n")    
+    log.info("\nmethod:%s--request url:%s\nrequest body:%s\nexpect:%s\n" % (method,url,str(payloads),str(expect)))    
+    log.info("actual result:%s\n" % str(res.text))
 
 #    assert_util(expect, res.text, run_result_txt)
     return res.text
