@@ -12,10 +12,11 @@ class handle_users(object):
     idx = 0
     name = ""
     passwd = ""
+    config_key='users'
 
     def __init__(self,user_config = '%s/data/driven_yaml/user_config.yaml' % base_dir):
-        self.name = read_yaml(user_config)['test_user']
-        self.passwd = read_yaml(user_config)['test_passwd']
+        self.name = read_yaml(user_config)[self.config_key]['test_user']
+        self.passwd = read_yaml(user_config)[self.config_key]['test_passwd']
 
     def add_user(self, url, header, name, passwd):
         payload = '{"username":"%s","password":"%s"}' % (name, passwd)
