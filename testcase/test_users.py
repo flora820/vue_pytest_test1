@@ -11,7 +11,7 @@ import json
 
 @pytest.fixture(scope="function",autouse=True)
 def user_main(user_config = '%s/data/driven_yaml/user_config.yaml' % base_dir, extract_file = "%s/data/driven_yaml/extract.yaml" % base_dir):
-    url = read_yaml(user_config)['base_url']+read_yaml(user_config)['test_users_url']
+    url = read_yaml(user_config)['users']['base_url']+read_yaml(user_config)['users']['test_users_url']
     header = '{"Authorization":"%s","Content-Type":"application/json"}' % read_yaml(extract_file)['token']
     header = eval(header)
     #print(url)
@@ -33,7 +33,7 @@ def user_main(user_config = '%s/data/driven_yaml/user_config.yaml' % base_dir, e
 
 @pytest.mark.users
 @pytest.mark.all
-@pytest.mark.parametrize('args', extract_util('%s/data/yaml/users.yaml' % base_dir))
+@pytest.mark.parametrize('args', extract_util('%s/data/yaml/users.yaml' % base_dir, user_list=['common','users']))
 def test_users(args,user_main):
     test_users.__doc__ = str(args['case_name'])
     log.info("\n\n\n\n\n--------------------------------------------case_name:%s---------------------------------------------------------\n" % str(args['case_name']))

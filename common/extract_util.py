@@ -8,7 +8,7 @@ import json
 
 @exception_utils
 def extract_util(case_file, extract_file='%s/data/driven_yaml/extract.yaml' % base_dir, \
-        user_yamlfile='%s/data/driven_yaml/user_config.yaml' % base_dir):
+        user_yamlfile='%s/data/driven_yaml/user_config.yaml' % base_dir, user_list=None):
     
     """
     数据关联的公共方法
@@ -32,9 +32,13 @@ def extract_util(case_file, extract_file='%s/data/driven_yaml/extract.yaml' % ba
 
     global value_extract_keys, value_extract, total_extract
     total_extract = {}
+    total_user = {}
 
     value_extract = read_yaml(extract_file)
     value_user = read_yaml(user_yamlfile)
+    for i in range(len(user_list)):
+        if (value_user[user_list[i]]):
+            total_user.update(value_user[user_list[i]]) 
     #print(value_extract)
     #print(value_user)
 
@@ -42,7 +46,7 @@ def extract_util(case_file, extract_file='%s/data/driven_yaml/extract.yaml' % ba
         total_extract.update(value_extract)
     
     if value_user:
-        total_extract.update(value_user)
+        total_extract.update(total_user)
 
 
     for m in match_list:

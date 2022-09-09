@@ -11,7 +11,7 @@ import json
 
 @pytest.mark.run(order=1)
 @pytest.mark.all
-@pytest.mark.parametrize('args', extract_util('%s/data/yaml/login.yaml' % base_dir))
+@pytest.mark.parametrize('args', extract_util('%s/data/yaml/login.yaml' % base_dir,user_list=['common','login']))
 
 def test_login(args):
     log.info("\n\n\n\n\n--------------------------------------------case_name:%s---------------------------------------------------------\n" % str(args['case_name']))
@@ -29,6 +29,3 @@ def test_login(args):
     assert_util(expect, rep,run_result_txt)
     log.info("\n\n\n\n\n--------------------------------------------case_name:%s end---------------------------------------------------------\n" % str(args['case_name']))
 
-    if args['id'] == 1:
-        token = json.loads(rep)['data']['token']
-        save_variable(key='token', value=token)
